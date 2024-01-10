@@ -4,6 +4,7 @@ import TestComponent2 from "../TestComponent2";
 import Login from "../Login/LoginUI";
 import Signup from "../Login/SignUp";
 import RouterTest from "../RouterTest";
+import SignUp2 from "../Login/SignUp2";
 
 const BaseRouter = () => {
   return (
@@ -13,6 +14,7 @@ const BaseRouter = () => {
           <Route index element={<TestComponent2 />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="signUpTest" element={<SignUp2 />} />
           {/* <Route path="about" element={<About />} />
 
 

@@ -1,5 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   // 화면 중앙 정렬
@@ -12,16 +14,52 @@ const style = {
 };
 
 function LoginUI() {
+  const Navigate = useNavigate();
+  const onSubmit = (e) => {
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      alert("입력값을 확인해주세요");
+      return;
+    }
+    e.preventDefault();
+    console.log("submit 실행");
+    const id = e.target.formID.value;
+    const password = e.target.formPassword.value;
+    fetchTest(id, password);
+  };
+  const fetchTest = async (id, pwd) => {
+    axios
+      .post("/login", { id: id, password: pwd })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          alert("로그인 성공");
+          localStorage.setItem("x-access-token", res.data.token);
+          Navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+
+        if (err.response.data.includes("없는 아이디")) {
+          alert("없는 아이디입니다. 회원가입을 해주세요.");
+          return;
+        }
+        alert("로그인 실패. 아이디와 비밀번호를 확인해주세요");
+      });
+  };
   return (
     <div style={style}>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formID">
           <Form.Label>ID</Form.Label>
-          <Form.Control type="text" placeholder="Enter ID" />
+          <Form.Control type="text" placeholder="Enter ID" required />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" required />
         </Form.Group>
         <Button variant="primary" type="submit">
           로그인

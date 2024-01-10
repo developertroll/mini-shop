@@ -13,9 +13,11 @@ import rootReducer from "./components/Reducer/rootReducer";
 // import SignUp from "./components/Login/SignUp";
 // import TestComponent2 from "./components/TestComponent2";
 import BaseRouter from "./components/Router/BaseRouter";
+import axios from "axios";
 
 const store = createStore(rootReducer);
 console.log(store.getState());
+axios.defaults.baseURL = "http://localhost:3001";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
