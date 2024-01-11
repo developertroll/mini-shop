@@ -36,11 +36,13 @@ function SignUp() {
       return;
     }
     e.preventDefault();
-    console.log("submit 실행");
+    if (window.confirm("이 정보로 가입하시겠습니까? (확인/취소)")) {
+      console.log("가입실행");
+      setValidated(true);
+      fetchtest();
+    }
+    console.log("가입취소");
     // Form 내부 데이터 콘솔 출력
-    console.log(user);
-    setValidated(true);
-    fetchtest();
   };
 
   const fetchtest = async () => {

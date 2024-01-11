@@ -3,15 +3,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function ConfirmModal(props) {
-  const [show, setShow] = useState(true);
-  const [confirm, setConfirm] = useState(false);
+  const [show, setShow] = useState(props.show);
   const handleClose = () => setShow(false);
   const handleConfirm = () => {
-    setConfirm(true);
     setShow(false);
+    props.confirm(true);
   };
   const handleCancel = () => {
-    setConfirm(false);
     setShow(false);
   };
   return (

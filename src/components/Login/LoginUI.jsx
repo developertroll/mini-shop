@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const style = {
   // 화면 중앙 정렬
@@ -15,6 +16,18 @@ const style = {
 
 function LoginUI() {
   const Navigate = useNavigate();
+  const token = localStorage.getItem("x-access-token");
+
+  // 이 컴포넌트가 mount될때 로그인 여부 체크
+  // 로그인 되어있으면 메인페이지로 이동
+  // 로그인 안되어있으면 그대로
+  useEffect(() => {
+    if (token) {
+      alert("이미 로그인 되어있습니다.");
+      Navigate("/");
+    }
+  }, [token]);
+
   const onSubmit = (e) => {
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -50,6 +63,7 @@ function LoginUI() {
         alert("로그인 실패. 아이디와 비밀번호를 확인해주세요");
       });
   };
+
   return (
     <div style={style}>
       <Form onSubmit={onSubmit}>

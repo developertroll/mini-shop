@@ -1,24 +1,28 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import moment from "moment";
+import BoardButtons from "./BoardButtons";
 
 function BoardDetail() {
-  const { index } = useParams();
-  const target = boardList[index];
+  const location = useLocation();
+  const prop = { ...location.state };
+  const update = moment(prop.update).format("YYYY-MM-DD");
   return (
     <div>
       <Row>
-        <Col>{`[${props.type}]${props.title}`}</Col>
+        <Col>{`[${prop.Type}]${prop.Title}`}</Col>
       </Row>
       <Row>
-        <Col>{`작성자: ${props.writer}`}</Col>
-        <Col>{`조회수: ${props.view}`}</Col>
-        <Col>{`좋아요: ${props.like}`}</Col>
-        <Col>{`수정일: ${props.update}`}</Col>
+        <Col>{`작성자: ${prop.writer}`}</Col>
+        <Col>{`조회수: ${prop.view}`}</Col>
+        <Col>{`좋아요: ${prop.like}`}</Col>
+        <Col>{`수정일: ${update}`}</Col>
       </Row>
       <Row>
-        <Col>{props.content}</Col>
+        <Col>{prop.content}</Col>
       </Row>
+      <BoardButtons />
     </div>
   );
 }
