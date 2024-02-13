@@ -1,6 +1,7 @@
 const ADD_BOARD = "BoardReducer/ADD_BOARD";
 const REMOVE_BOARD = "BoardReducer/REMOVE_BOARD";
 const UPDATE_BOARD = "BoardReducer/UPDATE_BOARD";
+const SET_BOARD = "BoardReducer/SET_BOARD";
 
 const initialState = [
   {
@@ -28,6 +29,10 @@ export const updateBoard = (index, board) => ({
   board,
 });
 
+export const setBoard = (board) => ({
+  type: SET_BOARD,
+  board,
+});
 export default function BoardReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_BOARD:
@@ -38,6 +43,8 @@ export default function BoardReducer(state = initialState, action) {
       return state.map((board) =>
         board.index === action.index ? action.board : board
       );
+    case SET_BOARD:
+      return action.board;
     default:
       return state;
   }

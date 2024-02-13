@@ -1,9 +1,5 @@
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-
 const style = {
   cursor: "pointer",
-  border: "1px solid black",
 };
 
 function BoardBase(props) {
@@ -11,14 +7,14 @@ function BoardBase(props) {
     props.showDetail(props.index);
   };
   return (
-    <Row onClick={handleClick} style={style}>
-      <Col>{props.index}</Col>
-      <Col xs={8}>{props.title}</Col>
-      <Col>{props.writer}</Col>
-      <Col>{props.like}</Col>
-      <Col>{props.view}</Col>
-      <Col>{props.update}</Col>
-    </Row>
+    <tr onClick={handleClick} style={style}>
+      <td>{props.index}</td>
+      <td xs={8}>{props.title}</td>
+      <td style={{ width: 75 }}>{props.writer}</td>
+      <td>{props.like}</td>
+      <td>{props.view}</td>
+      <td>{props.update}</td>
+    </tr>
   );
 }
 

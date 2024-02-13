@@ -1,6 +1,9 @@
+import axios from "axios";
+
 const ADD_USER = "UserReducer/ADD_USER";
 const REMOVE_USER = "UserReducer/REMOVE_USER";
 const UPDATE_USER = "UserReducer/UPDATE_USER";
+const INITIALIZE_USER = "UserReducer/INITIALIZE_USER";
 
 const initialState = [
   {
@@ -48,6 +51,10 @@ export const updateUser = (index, user) => ({
   user,
 });
 
+export const initializeUser = () => ({
+  type: INITIALIZE_USER,
+});
+
 export default function UserReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_USER:
@@ -58,6 +65,9 @@ export default function UserReducer(state = initialState, action) {
       return state.map((user) =>
         user.index === action.index ? action.user : user
       );
+    case INITIALIZE_USER:
+      axios.get("/");
+      return;
     default:
       return state;
   }
